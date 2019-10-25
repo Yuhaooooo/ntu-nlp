@@ -1,0 +1,10 @@
+host: '0.0.0.0'
+port: 8888
+
+gunicorn:
+  timeout: 60
+  num_workers: 2
+
+review_classitication:
+  host: '155.69.146.227'
+  port: 8001
