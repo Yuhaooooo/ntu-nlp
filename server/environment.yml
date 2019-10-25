@@ -1,4 +1,4 @@
-name: ml-web-demo
+name: ntu-nlp-server
 channels:
   - defaults
 dependencies:

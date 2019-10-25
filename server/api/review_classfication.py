@@ -15,11 +15,10 @@ class MaxAudioClassifierController(Controller):
         self._host_url = 'http://{}:{}'.format(mac_configs['host'], mac_configs['port'])
 
     @mapping('predict', methods=['POST'])
-    async def classify(self):
-        params = {'start_time': start_time}
-        files = {'audio': (audio.filename, audio.file.read(), audio.content_type)}
+    async def classify(self, *, sentence: str):
+        params = {'sentence': sentence}
 
-        response = await requests.post(self._host_url + '/model/predict', files=files, params=params)
+        response = await requests.post(self._host_url + '/model/predict', params=params)
 
         # parse response
         response_dict = json.loads(response.text)
@@ -27,7 +26,7 @@ class MaxAudioClassifierController(Controller):
         message = ''
         if response.ok:
             data = {
-                'predictions': response_dict['predictions'],
+                'review': response_dict['review'],
             }
         else:
             message = response_dict['message']
