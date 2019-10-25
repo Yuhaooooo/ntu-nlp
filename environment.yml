@@ -60,5 +60,6 @@ dependencies:
   - zlib=1.2.11
   - pip:
     - regex==2018.1.10
+    - allennlp==0.9.0
 prefix: /home/lym/anaconda3/envs/ntu-nlp
 
