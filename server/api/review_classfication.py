@@ -18,7 +18,7 @@ class MaxAudioClassifierController(Controller):
     async def classify(self, *, sentence: str):
         params = {'sentence': sentence}
 
-        response = await requests.post(self._host_url + '/model/predict', params=params)
+        response = await requests.post(self._host_url + '/predict', params=params)
 
         # parse response
         response_dict = json.loads(response.text)
