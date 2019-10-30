@@ -12,6 +12,9 @@ conda activate ntu-nlp
 
 # create data folders
 mkdir -p core/data
+
+# Download model
+python -m spacy download en
 ```
 
 ## Download Data
@@ -23,3 +26,4 @@ sh scripts/download-data.sh
 
 #### Option 2. Step-by-step download
 1. Download [preprocessed data](https://drive.google.com/open?id=1ay53rIluB334-RUqn28GR-QI6HxutJ6H) and move it into `core/data`.
+2. Data for training the sentiment analysis model [preprocessed data](https://drive.google.com/drive/folders/1GJd8tYRcxwuRj7mvZCX1zjjr63MF-zW1?usp=sharing)
