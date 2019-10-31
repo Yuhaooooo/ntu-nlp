@@ -1,4 +1,5 @@
 import pickle
+from pathlib import Path
 
 import torch
 
@@ -12,30 +13,29 @@ def text_field_preprocessing(tokens: list):
 
 TEXT = Field(preprocessing=text_field_preprocessing, sequential=True, tokenize='spacy', lower=True)
 LABEL = LabelField(dtype=torch.float)
-
+MAX_VOCAB_SIZE = 10000
+BATCH_SIZE = 256
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+DATA_DIR = Path(__file__).absolute().parent / '../data'
+
+
+def save_text_fields():
+    with open('text_fields.pkl', 'wb') as f:
+        pickle.dump(TEXT, f)
 
 
 def get_iterator():
-    DATA_DIR = '../data'
-
     tv_datafields = [('stars', LABEL), ('text', TEXT)]
 
     trn, vld = TabularDataset.splits(
         path=DATA_DIR,  # the root directory where the data lies
-        train='train1.csv', validation="val1.csv",
+        train='train.csv', validation="val.csv",
         format='csv',
         skip_header=True,
         fields=tv_datafields)
 
-    MAX_VOCAB_SIZE = 100
     TEXT.build_vocab(trn, max_size=MAX_VOCAB_SIZE)
     LABEL.build_vocab(trn)
-
-    with open('text_fields.pkl', 'wb') as f:
-        pickle.dump(TEXT, f)
-
-    BATCH_SIZE = 64
 
     train_iterator, valid_iterator = BucketIterator.splits(
         (trn, vld),

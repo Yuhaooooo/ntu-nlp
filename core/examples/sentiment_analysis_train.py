@@ -5,6 +5,10 @@ from core.models.emotional import RNN
 from core.utils.data import TEXT, device, get_iterator
 import torch.optim as optim
 
+from tqdm import trange
+
+train_iterator, valid_iterator = get_iterator()
+
 INPUT_DIM = len(TEXT.vocab)
 
 model = RNN(INPUT_DIM, 128, 256, 1)
@@ -15,8 +19,6 @@ criterion = nn.MSELoss()
 
 model = model.to(device)
 criterion = criterion.to(device)
-
-train_iterator, valid_iterator = get_iterator()
 
 
 def binary_accuracy(preds, y):
@@ -40,8 +42,6 @@ def train(model, iterator, optimizer, criterion):
     for batch in iterator:
         optimizer.zero_grad()
         predictions = model(batch.text).squeeze(1)
-        print("batch text training size: ", batch.text.size())
-        print(batch.text)
         loss = criterion(predictions, batch.stars)
         acc = binary_accuracy(predictions, batch.stars)
         loss.backward()
@@ -71,11 +71,11 @@ def evaluate(model, iterator, criterion):
     return epoch_loss / len(iterator), epoch_acc / len(iterator)
 
 
-N_EPOCHS = 5
+N_EPOCHS = 200
 
 best_valid_loss = float('inf')
-
-for epoch in range(N_EPOCHS):
+t = trange(N_EPOCHS, desc='')
+for epoch in t:
     train_loss, train_acc = train(model, train_iterator, optimizer, criterion)
     valid_loss, valid_acc = evaluate(model, valid_iterator, criterion)
 
@@ -83,5 +83,5 @@ for epoch in range(N_EPOCHS):
         best_valid_loss = valid_loss
         torch.save(model.state_dict(), 'tut1-model.pt')
 
-    print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc * 100:.2f}%')
-    print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
+    t.set_description('Train Loss: {:.3f} | Train Acc: {:.2f}% | Val. Loss: {:.3f} |  Val. Acc: {:.2f}%'
+                      .format(train_loss, train_acc * 100, valid_loss, valid_acc * 100))

@@ -30,29 +30,24 @@ def words2id(words_tokenized, vocab):
     return id_list
 
 
-nlp = spacy.load('en')
-doc = nlp(text)
-tokenized = [token.text for token in doc]
+# nlp = spacy.load('en')
+# doc = nlp(text)
+# tokenized = [token.text for token in doc]
 # batch_one_data = torch.ones((1, 100), dtype=torch.long).cuda()
 
 
 test_dataset = TabularDatasetFromList(
-    input_list=[tokenized],
+    input_list=[['This is an example'], ['The food is very delicious, I love this restaurant']],
     format='csv',
     fields=predict_datafield)
 
-test_iterator = BucketIterator.splits(
+test_iterator = BucketIterator(
     test_dataset,
     batch_size=1,
     sort_key=lambda x: len(x.text),
-    device='cuda')
+    device='cuda',
+    train=False)
 
-# id_list = words2id(tokenized, vocab)
-# batch_one_data[0][:len(id_list)] = torch.LongTensor(id_list).cuda()
-
-# batch_one_data = batch_one_data.transpose(0, 1)
-# print(batch_one_data)
-# print(batch_one_data.size())
 model = RNN(102, 128, 256, 1)
 model.cuda()
 model.load_state_dict(torch.load('tut1-model.pt'))
@@ -60,5 +55,5 @@ model.eval()
 
 output = None
 for batch in test_iterator:
-    output = model(test_iterator)
-print(output)
+    output = model(batch.text)
+    print(output)
