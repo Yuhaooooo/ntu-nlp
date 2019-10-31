@@ -9,6 +9,7 @@ input_sentence=[['The','weather','is','good','so','that','I','am','not','happy',
 # input_sentence = [['yes'],['Yes, I completely agree with you.']]
 sentence = [['The','weather','is','good','so','that','I','am','happy','.'],['The','weather','is','good','so','that','I','am','happy','.'],['The','weather','is','good','so','that','I','am','happy','.']]
 
+
 character_ids = batch_to_ids(input_sentence)
 
 elmo_embeddings = elmo(character_ids)
