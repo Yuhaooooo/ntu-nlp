@@ -12,6 +12,9 @@ conda activate ntu-nlp
 
 # create data folders
 mkdir -p core/data
+
+# Download model
+python -m spacy download en
 ```
 
 ## Download Data
