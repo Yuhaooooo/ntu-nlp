@@ -12,5 +12,7 @@ class RNN(nn.Module):
     def forward(self, text):
         embedded = self.embedding(text)
         output, hidden = self.rnn(embedded)
+        print(output.size())
+        print(hidden.size())
         assert torch.equal(output[-1, :, :], hidden.squeeze(0))
         return self.fc(hidden.squeeze(0))

@@ -2,19 +2,21 @@ import torch
 import torch.nn as nn
 
 from core.models.emotional import RNN
-from core.utils.data import TEXT, device, train_iterator, valid_iterator
+from core.utils.data import TEXT, device, get_iterator
 import torch.optim as optim
 
 INPUT_DIM = len(TEXT.vocab)
 
 model = RNN(INPUT_DIM, 128, 256, 1)
 
-optimizer = optim.SGD(model.parameters(), lr=1e-3)
+optimizer = optim.Adam(model.parameters(), lr=1e-3)
 
-criterion = nn.BCEWithLogitsLoss()
+criterion = nn.MSELoss()
 
 model = model.to(device)
 criterion = criterion.to(device)
+
+train_iterator, valid_iterator = get_iterator()
 
 
 def binary_accuracy(preds, y):
@@ -23,7 +25,7 @@ def binary_accuracy(preds, y):
     """
 
     # round predictions to the closest integer
-    rounded_preds = torch.round(torch.sigmoid(preds))
+    rounded_preds = torch.round(preds)
     correct = (rounded_preds == y).float()  # convert into float for division
     acc = correct.sum() / len(correct)
     return acc
@@ -38,6 +40,8 @@ def train(model, iterator, optimizer, criterion):
     for batch in iterator:
         optimizer.zero_grad()
         predictions = model(batch.text).squeeze(1)
+        print("batch text training size: ", batch.text.size())
+        print(batch.text)
         loss = criterion(predictions, batch.stars)
         acc = binary_accuracy(predictions, batch.stars)
         loss.backward()
