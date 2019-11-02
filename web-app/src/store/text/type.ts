@@ -6,70 +6,65 @@ import {
   State,
 } from '../../constant/lib';
 
-export const MICROSERVICE_T_NER_REQ = 'MICROSERVICE_T_NER_REQ';
-export const MICROSERVICE_T_NER_REC = 'MICROSERVICE_T_NER_REC';
+export const REVIEW_REQ = 'REVIEW_REQ';
+export const REVIEW_REC = 'REVIEW_REC';
 
-type MicroserviceTNERReqAction = Action<typeof MICROSERVICE_T_NER_REQ>;
-type MicroserviceTNERRecSuccessAction = ActionReceive<
-  typeof MICROSERVICE_T_NER_REC,
-  MicroserviceTNERRecData
->;
-type MicroserviceTNERRecFailureAction = ActionReceive<
-  typeof MICROSERVICE_T_NER_REC
->;
+type ReviewReqAction = Action<typeof REVIEW_REQ>;
+type ReviewRecSuccessAction = ActionReceive<typeof REVIEW_REC, ReviewRecData>;
+type ReviewRecFailureAction = ActionReceive<typeof REVIEW_REC>;
 
 /**
- * NER received data type after json decoder
+ * Review received data type after json decoder
  */
-type MicroserviceTNERRecData = string;
+type ReviewRecData = {
+  stars: number;
+};
 
 /**
- * NER received json type from server api1
+ * Review received json type from server api1
  */
-type MicroserviceTNERRecDataRaw = MicroserviceTNERRecData;
+type ReviewRecDataRaw = ReviewRecData;
 
 /**
- * NER request action factory
+ * Review request action factory
  */
-export type MicroserviceTNERReqActionFactory = ActionRequestFactory<
-  MicroserviceTNERReqAction
->;
+export type ReviewReqActionFactory = ActionRequestFactory<ReviewReqAction>;
 
 /**
- * NER receive success action factory
+ * Review receive success action factory
  */
-export type MicroserviceTNERRecSuccessActionFactory = ActionReceiveFactory<
-  MicroserviceTNERRecSuccessAction,
-  MicroserviceTNERRecDataRaw
+export type ReviewRecSuccessActionFactory = ActionReceiveFactory<
+  ReviewRecSuccessAction,
+  ReviewRecDataRaw
 >;
 
 /**
  * NER receive failure action factory
  */
-export type MicroserviceTNERRecFailureActionFactory = ActionReceiveFactory<
-  MicroserviceTNERRecFailureAction
+export type ReviewRecFailureActionFactory = ActionReceiveFactory<
+  ReviewRecFailureAction
 >;
 
 /**
- * NER action type for reducer
+ * Review action type for reducer
  */
-export type MicroserviceTNERActionType =
-  | MicroserviceTNERReqAction
-  | MicroserviceTNERRecSuccessAction
-  | MicroserviceTNERRecFailureAction;
+export type ReviewActionType =
+  | ReviewReqAction
+  | ReviewRecSuccessAction
+  | ReviewRecFailureAction;
 
-export type MicroserviceTActionType = MicroserviceTNERActionType;
+export type TextActionType = ReviewActionType;
 
 /**
- * NER request type for frontend
+ * Review request type for frontend
  */
-export interface MicroserviceTNERReqType {
-  text: string;
+export interface ReviewReqType {
+  sentence: string;
 }
 
 /**
- * Microservice text state for reducer
+ * text state for reducer
  */
-export interface MicroserviceTState {
-  ner: State<string>;
+export interface TextState {
+  text: State<{ stars: number }>;
 }
