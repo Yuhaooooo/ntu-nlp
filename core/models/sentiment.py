@@ -20,9 +20,3 @@ class RNN(nn.Module):
         output, hidden = self.rnn(self.nnDropout(embedded))
         assert torch.equal(output[-1, :, :], hidden.squeeze(0))
         return self.fc(hidden.squeeze(0))
-
-    def predict(self, text: str):
-        pass
-
-    def batch_predict(self, texts: list):
-        pass

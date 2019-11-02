@@ -1,9 +1,9 @@
 import torch
 import torch.nn as nn
 
-from core.configs import DATA_DIR, OUTPUT_DIR
-from core.models.sentiment import RNN
-from core.utils.data import get_iterator, build_field, save_text_fields
+from configs import DATA_DIR, OUTPUT_DIR
+from models.sentiment import RNN
+from utils.data import get_iterator, build_field, save_text_fields
 import torch.optim as optim
 
 import os.path as osp

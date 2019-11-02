@@ -7,12 +7,12 @@ import torch
 import torch.nn as nn
 from torchtext.data import BucketIterator
 
-from core.configs import OUTPUT_DIR
-from core.models.sentiment import RNN
-from core.utils.TabularDatasetFromList import TabularDatasetFromList
+from configs import OUTPUT_DIR
+from models.sentiment import RNN
+from utils.TabularDatasetFromList import TabularDatasetFromList
 
 # noinspection PyUnresolvedReferences
-from core.utils.data import text_field_preprocessing
+from utils.data import text_field_preprocessing
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -23,7 +23,7 @@ predict_datafield = [('text', text_field)]
 
 
 test_dataset = TabularDatasetFromList(
-    input_list=[['This is an example'], ['The food is very delicious, I love this restaurant']],
+    input_list=[['This is an example']],
     format='csv',
     fields=predict_datafield)
 
@@ -35,11 +35,11 @@ test_iterator = BucketIterator(
     train=False)
 
 model: nn.Module = RNN(text_field)
-model.cuda()
+model.to(device)
 model.load_state_dict(torch.load(osp.join(OUTPUT_DIR, 'sentiment-model.pt')))
 model.eval()
 
 output = None
 for batch in test_iterator:
     output = model(batch.text)
-    print(output)
+    print(*output.item())
