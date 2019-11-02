@@ -13,8 +13,8 @@ def text_field_preprocessing(tokens: list):
 
 TEXT = Field(preprocessing=text_field_preprocessing, sequential=True, tokenize='spacy', lower=True)
 LABEL = LabelField(dtype=torch.float)
-MAX_VOCAB_SIZE = 10000
-BATCH_SIZE = 256
+MAX_VOCAB_SIZE = 30000
+BATCH_SIZE = 128
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 DATA_DIR = Path(__file__).absolute().parent / '../data'
 
@@ -34,7 +34,7 @@ def get_iterator():
         skip_header=True,
         fields=tv_datafields)
 
-    TEXT.build_vocab(trn, max_size=MAX_VOCAB_SIZE)
+    TEXT.build_vocab(trn, vectors="glove.6B.300d")
     LABEL.build_vocab(trn)
 
     train_iterator, valid_iterator = BucketIterator.splits(

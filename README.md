@@ -15,6 +15,7 @@ mkdir -p core/data
 
 # Download model
 python -m spacy download en
+python -c 'import nltk; nltk.download('vader_lexicon')'
 ```
 
 ## Download Data

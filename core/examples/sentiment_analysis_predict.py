@@ -30,12 +30,6 @@ def words2id(words_tokenized, vocab):
     return id_list
 
 
-# nlp = spacy.load('en')
-# doc = nlp(text)
-# tokenized = [token.text for token in doc]
-# batch_one_data = torch.ones((1, 100), dtype=torch.long).cuda()
-
-
 test_dataset = TabularDatasetFromList(
     input_list=[['This is an example'], ['The food is very delicious, I love this restaurant']],
     format='csv',
@@ -48,7 +42,7 @@ test_iterator = BucketIterator(
     device='cuda',
     train=False)
 
-model = RNN(102, 128, 256, 1)
+model = RNN(300, 512, 1, text_field)
 model.cuda()
 model.load_state_dict(torch.load('tut1-model.pt'))
 model.eval()

@@ -9,11 +9,9 @@ from tqdm import trange
 
 train_iterator, valid_iterator = get_iterator()
 
-INPUT_DIM = len(TEXT.vocab)
+model: nn.Module = RNN(300, 512, 1, TEXT)
 
-model = RNN(INPUT_DIM, 128, 256, 1)
-
-optimizer = optim.Adam(model.parameters(), lr=1e-3)
+optimizer = optim.Adam(model.parameters(), lr=1e-4)
 
 criterion = nn.MSELoss()
 
