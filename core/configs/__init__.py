@@ -1,21 +1,22 @@
-import os.path as osp
 import sys
+from pathlib import Path
 from typing import Union
 
 import yaml
 
 # project directory
-BASE_DIR = osp.join(
-    osp.dirname(osp.abspath(__file__)),
-    '..'
-)
+BASE_DIR = Path(__file__).absolute().parent / '..'
+
+DATA_DIR = str(BASE_DIR / 'data')
+OUTPUT_DIR = str(BASE_DIR / 'output')
+
 
 # add PYTHONPATH
 sys.path.extend([BASE_DIR])
 
 
 def _parse_config() -> Union[dict, list, None]:
-    with open(osp.join(BASE_DIR, 'config', 'config.yaml'), 'r') as stream:
+    with open(BASE_DIR / 'configs/config.yaml', 'r') as stream:
         try:
             return yaml.safe_load(stream)
         except yaml.YAMLError as exc:
@@ -25,4 +26,4 @@ def _parse_config() -> Union[dict, list, None]:
 configs = _parse_config()
 
 
-__all__ = ["BASE_DIR", "configs"]
+__all__ = ['BASE_DIR', 'DATA_DIR', 'OUTPUT_DIR', 'configs']

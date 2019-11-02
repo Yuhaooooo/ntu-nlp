@@ -1,45 +1,46 @@
 import pickle
-from pathlib import Path
+import os.path as osp
 
 import torch
 
 from torchtext.data import Field, LabelField, TabularDataset, BucketIterator
 from string import punctuation
 
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 
 def text_field_preprocessing(tokens: list):
     return list(filter(lambda token: token not in punctuation, tokens))
 
 
-TEXT = Field(preprocessing=text_field_preprocessing, sequential=True, tokenize='spacy', lower=True)
-LABEL = LabelField(dtype=torch.float)
-MAX_VOCAB_SIZE = 30000
-BATCH_SIZE = 128
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-DATA_DIR = Path(__file__).absolute().parent / '../data'
+def build_field():
+    TEXT = Field(preprocessing=text_field_preprocessing, sequential=True, tokenize='spacy', lower=True)
+    LABEL = LabelField(dtype=torch.float)
+    datafields = [('stars', LABEL), ('text', TEXT)]
+    return datafields
 
 
-def save_text_fields():
-    with open('text_fields.pkl', 'wb') as f:
-        pickle.dump(TEXT, f)
+def save_text_fields(field, output_dir: str):
+    with open(osp.join(output_dir, 'fields.pkl'), 'wb') as f:
+        pickle.dump(field, f)
 
 
-def get_iterator():
-    tv_datafields = [('stars', LABEL), ('text', TEXT)]
-
+def get_iterator(datafields, data_dir, bs):
     trn, vld = TabularDataset.splits(
-        path=DATA_DIR,  # the root directory where the data lies
+        path=data_dir,
         train='train.csv', validation="val.csv",
         format='csv',
         skip_header=True,
-        fields=tv_datafields)
+        fields=datafields)
+    _, label_field = datafields[0]
+    _, text_field = datafields[1]
 
-    TEXT.build_vocab(trn, vectors="glove.6B.300d")
-    LABEL.build_vocab(trn)
+    text_field.build_vocab(trn, vectors="glove.6B.300d")
+    label_field.build_vocab(trn)
 
     train_iterator, valid_iterator = BucketIterator.splits(
         (trn, vld),
-        batch_size=BATCH_SIZE,
+        batch_size=bs,
         sort_key=lambda x: len(x.text),
         device=device)
 

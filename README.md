@@ -11,7 +11,7 @@ conda env create -f environment.yml
 conda activate ntu-nlp
 
 # create data folders
-mkdir -p core/data
+mkdir -p core/{data,output}
 
 # Download model
 python -m spacy download en

@@ -1,33 +1,25 @@
 import pickle
 
+import os.path as osp
+# noinspection PyUnresolvedReferences
 import spacy
 import torch
+import torch.nn as nn
 from torchtext.data import BucketIterator
 
-from core.models.emotional import RNN
+from core.configs import OUTPUT_DIR
+from core.models.sentiment import RNN
 from core.utils.TabularDatasetFromList import TabularDatasetFromList
 
 # noinspection PyUnresolvedReferences
 from core.utils.data import text_field_preprocessing
 
-with open('../utils/text_fields.pkl', 'rb') as vocab_f:
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+with open(osp.join(OUTPUT_DIR, 'fields.pkl'), 'rb') as vocab_f:
     text_field = pickle.load(vocab_f)
 
 predict_datafield = [('text', text_field)]
-
-text = 'Some text is input into a neural network'
-
-
-def words2id(words_tokenized, vocab):
-    vocab_dict = dict(vocab)
-    id_list = []
-    for i in words_tokenized:
-        try:
-            id_list.append(float(vocab_dict[i]))
-        except KeyError:
-            id_list.append(float(10000))
-
-    return id_list
 
 
 test_dataset = TabularDatasetFromList(
@@ -39,12 +31,12 @@ test_iterator = BucketIterator(
     test_dataset,
     batch_size=1,
     sort_key=lambda x: len(x.text),
-    device='cuda',
+    device=device,
     train=False)
 
-model = RNN(300, 512, 1, text_field)
+model: nn.Module = RNN(text_field)
 model.cuda()
-model.load_state_dict(torch.load('tut1-model.pt'))
+model.load_state_dict(torch.load(osp.join(OUTPUT_DIR, 'sentiment-model.pt')))
 model.eval()
 
 output = None

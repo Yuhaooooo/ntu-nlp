@@ -1,22 +1,19 @@
 import torch
 import torch.nn as nn
 
-from core.models.emotional import RNN
-from core.utils.data import TEXT, device, get_iterator
+from core.configs import DATA_DIR, OUTPUT_DIR
+from core.models.sentiment import RNN
+from core.utils.data import get_iterator, build_field, save_text_fields
 import torch.optim as optim
+
+import os.path as osp
 
 from tqdm import trange
 
-train_iterator, valid_iterator = get_iterator()
-
-model: nn.Module = RNN(300, 512, 1, TEXT)
-
-optimizer = optim.Adam(model.parameters(), lr=1e-4)
-
-criterion = nn.MSELoss()
-
-model = model.to(device)
-criterion = criterion.to(device)
+BATCH_SIZE = 128
+LR = 1e-4
+N_EPOCHS = 200
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
 def binary_accuracy(preds, y):
@@ -69,17 +66,27 @@ def evaluate(model, iterator, criterion):
     return epoch_loss / len(iterator), epoch_acc / len(iterator)
 
 
-N_EPOCHS = 200
+if __name__ == '__main__':
+    data_field = build_field()
+    train_iterator, valid_iterator = get_iterator(data_field, bs=BATCH_SIZE, data_dir=DATA_DIR)
+    _, text_field = data_field[1]
+    save_text_fields(text_field, OUTPUT_DIR)
 
-best_valid_loss = float('inf')
-t = trange(N_EPOCHS, desc='')
-for epoch in t:
-    train_loss, train_acc = train(model, train_iterator, optimizer, criterion)
-    valid_loss, valid_acc = evaluate(model, valid_iterator, criterion)
+    model: nn.Module = RNN(text_field)
+    optimizer = optim.Adam(model.parameters(), lr=LR)
+    criterion = nn.MSELoss()
+    model = model.to(device)
+    criterion = criterion.to(device)
 
-    if valid_loss < best_valid_loss:
-        best_valid_loss = valid_loss
-        torch.save(model.state_dict(), 'tut1-model.pt')
+    best_valid_loss = float('inf')
+    t = trange(N_EPOCHS, desc='')
+    for epoch in t:
+        train_loss, train_acc = train(model, train_iterator, optimizer, criterion)
+        valid_loss, valid_acc = evaluate(model, valid_iterator, criterion)
 
-    t.set_description('Train Loss: {:.3f} | Train Acc: {:.2f}% | Val. Loss: {:.3f} |  Val. Acc: {:.2f}%'
-                      .format(train_loss, train_acc * 100, valid_loss, valid_acc * 100))
+        if valid_loss < best_valid_loss:
+            best_valid_loss = valid_loss
+            torch.save(model.state_dict(), osp.join(OUTPUT_DIR, 'sentiment-model.pt'))
+
+        t.set_description('Train Loss: {:.3f} | Train Acc: {:.2f}% | Val. Loss: {:.3f} |  Val. Acc: {:.2f}%'
+                          .format(train_loss, train_acc * 100, valid_loss, valid_acc * 100))
