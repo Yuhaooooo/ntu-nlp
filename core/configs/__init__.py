@@ -1,4 +1,3 @@
-import sys
 from pathlib import Path
 from typing import Union
 
@@ -11,10 +10,6 @@ DATA_DIR = str(BASE_DIR / 'data')
 OUTPUT_DIR = str(BASE_DIR / 'output')
 
 
-# add PYTHONPATH
-sys.path.extend([BASE_DIR])
-
-
 def _parse_config() -> Union[dict, list, None]:
     with open(BASE_DIR / 'configs/config.yaml', 'r') as stream:
         try:
@@ -24,6 +19,5 @@ def _parse_config() -> Union[dict, list, None]:
 
 
 configs = _parse_config()
-
 
 __all__ = ['BASE_DIR', 'DATA_DIR', 'OUTPUT_DIR', 'configs']

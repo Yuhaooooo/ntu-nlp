@@ -3,10 +3,12 @@ import torch.nn as nn
 
 from configs import DATA_DIR, OUTPUT_DIR
 from models.sentiment import RNN
-from utils.data import get_iterator, build_field, save_text_fields
+from utils.data import get_iterator, build_field, save_text_fields,  text_field_preprocessing
 import torch.optim as optim
 
 import os.path as osp
+
+import spacy
 
 from tqdm import trange
 

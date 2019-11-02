@@ -26,7 +26,7 @@ class MaxAudioClassifierController(Controller):
         message = ''
         if response.ok:
             data = {
-                'review': response_dict['review'],
+                'review': response_dict['stars'],
             }
         else:
             message = response_dict['message']
