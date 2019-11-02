@@ -7,11 +7,11 @@ from serving import Controller, mapping
 from serving.controller import json_wrapper
 
 
-class MaxAudioClassifierController(Controller):
+class ReviewPredictionController(Controller):
     def __init__(self, fast_api):
         super().__init__(fast_api, base_url='/review')
 
-        mac_configs = configs['review_classifier']
+        mac_configs = configs['review_prediction']
         self._host_url = 'http://{}:{}'.format(mac_configs['host'], mac_configs['port'])
 
     @mapping('predict', methods=['POST'])
