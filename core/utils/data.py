@@ -1,3 +1,4 @@
+import os
 import pickle
 import os.path as osp
 
@@ -21,7 +22,10 @@ def build_field():
 
 
 def save_text_fields(field, output_dir: str):
-    with open(osp.join(output_dir, 'fields.pkl'), 'wb') as f:
+    save_name = osp.join(output_dir, 'fields.pkl')
+    if os.path.isfile(save_name):
+        return
+    with open(save_name, 'wb') as f:
         pickle.dump(field, f)
 
 
