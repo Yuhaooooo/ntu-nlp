@@ -7,18 +7,24 @@ from nltk.tokenize import sent_tokenize
 from collections import Counter
 nlp = spacy.load("en_core_web_sm")
 
-def selectNBusinessId(df, seed=4, numberOfBusineesId=5):
+
+numberOfBusinessId=5
+numberOfPairs=5
+withExtra=False
+
+
+def selectNBusinessId(df, seed=4, numberOfBusinessId=5):
 
     business_id_list = df.business_id.values.tolist()
     random.Random(4).shuffle(business_id_list)
 
-    df_5 = df[df.business_id.isin(business_id_list[:numberOfBusineesId])]
+    df_5 = df[df.business_id.isin(business_id_list[:numberOfBusinessId])]
 
     bs_text_map = dict()
-    for bid in business_id_list[:numberOfBusineesId]:
+    for bid in business_id_list[:numberOfBusinessId]:
         bs_text_map[bid] = df_5[df_5['business_id'] == bid].text.tolist()
 
-    print('\n\n{} Selecting {} business ID {}\n'.format('-'*20, numberOfBusineesId, '-'*20))
+    print('\n\n{} Selecting {} business ID {}\n'.format('-'*20, numberOfBusinessId, '-'*20))
 
     for b in bs_text_map.keys():
         print('Business ID: ' ,b)
@@ -155,7 +161,7 @@ class NounAndAdjPair:
             
         return sentence_adjNoun_pair
 
-def getPairs(bs_text_map, numberOfPairs=5, returnInDf=True):
+def getPairs(bs_text_map, numberOfPairs=5, withExtra=False, returnInDf=True):
 
     bs_pair_map = dict(zip(list(bs_text_map.keys()), [[] for i in range(len(list(bs_text_map.keys())))]))
 
@@ -165,7 +171,7 @@ def getPairs(bs_text_map, numberOfPairs=5, returnInDf=True):
         print('Processing reviews from business ID: {} ...'.format(b))
         docs = bs_text_map[b]
         for doc in docs:
-            doc_nlp = NounAndAdjPair(doc)
+            doc_nlp = NounAndAdjPair(doc, withExtra = withExtra)
             bs_pair_map[b].extend(doc_nlp.getPairsWithFSA(returnOnlyPairs=True))
         
     
@@ -179,6 +185,7 @@ def getPairs(bs_text_map, numberOfPairs=5, returnInDf=True):
     if returnInDf:
         df = pd.DataFrame(columns=['BusinessId', 'AdjNounPair'])
         df.BusinessId, df.AdjNounPair = list(bs_pair_map.keys()), list(bs_pair_map.values())
+        df.to_csv('Adj_Noun_Pairs.csv')
         return df
 
     return bs_pair_map
@@ -186,15 +193,13 @@ def getPairs(bs_text_map, numberOfPairs=5, returnInDf=True):
 
 if __name__ == "__main__":
 
-    df = pd.read_csv(join('..','..','data','data.csv'))
+    df = pd.read_csv(join('..', 'data.csv'))
 
-    BusinessPairs = getPairs(selectNBusinessId(df), returnInDf=False)
+    businessPairs = getPairs(selectNBusinessId(df, numberOfBusinessId = numberOfBusinessId), numberOfPairs = numberOfPairs, withExtra = withExtra)
     
     print('\n\n\n{} RESULT {}\n\n'.format('-'*28, '-'*28))
 
-    for b, p in BusinessPairs.items():
-        print(b, ':\n', p, '\n')
-
+    print(businessPairs.values)
 
 
 

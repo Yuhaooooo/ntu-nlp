@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { Box, Button, IconButton, TextField, Theme } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/CloseRounded';
 import { makeStyles } from '@material-ui/styles';
-import { MicroserviceTNERReqType } from '../../../store/text/type';
+import { ReviewReqType } from '../../../store/text/type';
 
 const useStyles = makeStyles((theme: Theme) => ({
   textField: {
@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   iconContainer: {
     display: 'inline-block',
     position: 'absolute',
-    top: 0,
-    right: 0,
+    top: 4,
+    right: 4,
     width: 48,
     height: 48,
   },
@@ -27,14 +27,18 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface TextInputProps {
-  analyze: (props: MicroserviceTNERReqType) => any;
+  analyze: (props: ReviewReqType) => any;
 }
 
 const sample =
-  'In an announcement yesterday, Synagie said that its wholly owned ' +
-  'subsidiary, BTFL, has signed a memorandum of understanding (MOU) with ' +
-  "Lazada to provide services to manage and operate the e-commerce company's " +
-  'brand stores on its online marketplaces in Southeast Asia.';
+  'Not sure what pool service should entail but I get inconsistent service.' +
+  '  Sometimes they add chlorine tabs, sometimes not, sometimes they sweep,' +
+  ' sometimes not.  This is a rental house where I hired a professional to' +
+  ' maintain my equipment and relieve my tenants of the burden but there is a' +
+  ' lack of communication somewhere.  Water level dropped to point that it' +
+  ' burned up my motor and then they explained their policy about not filling' +
+  ' the pool to run up my bill.  The expensive repair on that could have ' +
+  'bought about 50,000 extra gallons:(';
 
 const TextInput = ({ analyze }: TextInputProps) => {
   const classes = useStyles();
@@ -63,7 +67,7 @@ const TextInput = ({ analyze }: TextInputProps) => {
       />
       <Box display='flex' justifyContent='space-between'>
         <Button onClick={handleLoadSample}>Get a sample</Button>
-        <Button color='primary' onClick={() => analyze({ text: value })}>
+        <Button color='primary' onClick={() => analyze({ sentence: value })}>
           Analyze
         </Button>
       </Box>

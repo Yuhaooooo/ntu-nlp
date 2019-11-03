@@ -1,21 +1,21 @@
 import {
-  MICROSERVICE_T_NER_REC,
-  MICROSERVICE_T_NER_REQ,
-  MicroserviceTNERRecFailureActionFactory,
-  MicroserviceTNERRecSuccessActionFactory,
-  MicroserviceTNERReqActionFactory,
-  MicroserviceTNERReqType,
+  REVIEW_REC,
+  REVIEW_REQ,
+  ReviewRecFailureActionFactory,
+  ReviewRecSuccessActionFactory,
+  ReviewReqActionFactory,
+  ReviewReqType,
 } from '../type';
 import { AsyncActionFactory } from '../../../constant/lib';
 import { xmlHttpRequest } from '../../../utils/httpRequest';
 import { api_host as apiHost, api_port as apiPort } from '../../../config';
 
-const requestPost: MicroserviceTNERReqActionFactory = () => ({
-  type: MICROSERVICE_T_NER_REQ,
+const requestPost: ReviewReqActionFactory = () => ({
+  type: REVIEW_REQ,
 });
 
-const receivePostSuccess: MicroserviceTNERRecSuccessActionFactory = json => ({
-  type: MICROSERVICE_T_NER_REC,
+const receivePostSuccess: ReviewRecSuccessActionFactory = json => ({
+  type: REVIEW_REC,
   status: 'SUCCESS',
   data: json.data,
   message: '',
@@ -23,8 +23,8 @@ const receivePostSuccess: MicroserviceTNERRecSuccessActionFactory = json => ({
   timestamp: json.timestamp,
 });
 
-const receivePostFailure: MicroserviceTNERRecFailureActionFactory = json => ({
-  type: MICROSERVICE_T_NER_REC,
+const receivePostFailure: ReviewRecFailureActionFactory = json => ({
+  type: REVIEW_REC,
   status: 'FAILURE',
   data: undefined,
   message: json.message,
@@ -32,15 +32,13 @@ const receivePostFailure: MicroserviceTNERRecFailureActionFactory = json => ({
   timestamp: json.timestamp,
 });
 
-const microserviceTNERPredict: AsyncActionFactory<
-  MicroserviceTNERReqType
-> = props => dispatch => {
-  const { text } = props as MicroserviceTNERReqType;
+const ReviewPredict: AsyncActionFactory<ReviewReqType> = props => dispatch => {
+  const { sentence } = props as ReviewReqType;
 
   const formData = new FormData();
-  formData.append('text', text);
+  formData.append('sentence', sentence);
   return xmlHttpRequest(dispatch, 'POST', {
-    url: `${apiHost}:${apiPort}/app/text/ner`,
+    url: `${apiHost}:${apiPort}/review/predict`,
     request: requestPost,
     receiveSuccess: receivePostSuccess,
     receiveFailure: receivePostFailure,
@@ -48,4 +46,4 @@ const microserviceTNERPredict: AsyncActionFactory<
   }) as XMLHttpRequest;
 };
 
-export default microserviceTNERPredict;
+export default ReviewPredict;

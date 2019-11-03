@@ -1,2 +1,4 @@
 # third library
-third/*
+third/
+app/weight/
+*.tar.gz

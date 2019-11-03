@@ -129,4 +129,7 @@ max-classifer
 # IDE
 .idea
 
+# MISC
 core/data/
+core/output/
+*.tar.gz

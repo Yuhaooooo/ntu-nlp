@@ -28,7 +28,7 @@ const sidebarItemDict = {
 };
 
 const MicroserviceApp: React.FC = () => {
-  useEffect(setTitleEffectFactory('Review classification Testbed'), []);
+  useEffect(setTitleEffectFactory('Review prediction Testbed'), []);
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = useState(false);
   const handleDrawerToggle = useCallback(() => setMobileOpen(!mobileOpen), [
