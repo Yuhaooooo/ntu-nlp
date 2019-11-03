@@ -64,7 +64,7 @@ def main():
     pos_tagger.tag_random_sentences(5) 
 ```
 2. The random seed is set to be 22, so that it will produce the same output every time. Comment out the seed if you wish to get different output.  <br/>
-3. The output is stored in ./core/examples/3.2-Dataset-analysis/results/pos_tagging/tagger_result.csv. The CSV file contains five sections: each section includes the tagging results produced by a different tagger for the same sentence. The order of taggers which generate the results are: default tagger, regex-based tagger, baseline tagger, unigram tagger, unigram tagger with backoff, bigram tagger, bigram tagger with backoff, trigram tagger, trigram tagger with backoff and perceptron tagger.  <br/>
+3. The output is stored in ./core/examples/3.2-Dataset-analysis/results/pos_tagging/tagger_result.csv. The CSV file contains five sections: each section includes the tagging results produced by a different tagger for the same sentence. The order of taggers which generate the results are: default tagger, regex-based tagger, baseline tagger, unigram tagger, unigram tagger with backoff, bigram tagger, bigram tagger with backoff, trigram tagger, trigram tagger with backoff and perceptron tagger.   <br/>
 
 
 ### Most Frequent Adjectives for each Rating
@@ -74,7 +74,7 @@ python3 core/examples/3.2-Dataset-analysis/most_freq_adj.py
 ```
 
 ##### Note:
-1. You need to edit the pos_tag.py file so that the csv_file_path in the main() is correctly pointing to the data.csv you downloaded.  <br/>
+1. You need to edit the most_freq_adj.py file so that the csv_file_path is correctly pointing to the data.csv you downloaded.   <br/>
 
 ```python
 if __name__ == "__main__":  
@@ -89,7 +89,7 @@ if __name__ == "__main__":
 ```
 
 2. The output is saved in ./core/examples/3.2-Dataset-analysis/results/most_freq_adj/.   <br/>
-3. The script will first group the reviews based on the rating star and generate a csv for each rating star (e.g. r1_review.csv). Afterwards, the most frequent words are counted and the results are stored in most_freq_adj.csv. Lastly, the most indicative words are calculated and the results are stored in most_indicative_adj.csv.  <br/>
+3. The script will first group the reviews based on the rating star and generate a csv for each rating star (e.g. r1_review.csv). Afterwards, the most frequent words are counted and the results are stored in most_freq_adj.csv. Lastly, the most indicative words are calculated and the results are stored in most_indicative_adj.csv.   <br/>
 
 ## 3.3 Noun Adjective Pair Summarizer
 ### Rule based method: POS Tagging + FSA
