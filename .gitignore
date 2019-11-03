@@ -127,7 +127,9 @@ dmypy.json
 max-classifer
 
 # IDE
-.idea
+.idea/
+
+**/.DS_Store
 
 # MISC
 core/data/
