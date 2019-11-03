@@ -42,8 +42,8 @@ def read_a_business(review_list):
     most_useful_adj_list = []
     most_useful_noun_list = []
 
-    most_useful_adj_counter = collections.Counter()
-    most_useful_noun_counter = collections.Counter()
+    # most_useful_adj_counter = collections.Counter()
+    # most_useful_noun_counter = collections.Counter()
 
     pair_list = []
     for text in review_list:
