@@ -146,7 +146,7 @@ if __name__ == "__main__":
     most_freq_adj = False
     most_indicative_adj = False
 
-    csv_file_path = join(getcwd(), "data.csv")
+    csv_file_path = join('..', "data.csv")
     output_path = join(getcwd(), "results", "most_freq_adj")
 
     adjExtractor = AdjExtractor(csv_file_path, output_path)

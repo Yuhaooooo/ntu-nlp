@@ -74,7 +74,7 @@ def plot(data, index):
 ## main program for Q3.2 part 2
 
 def run():
-	csv_path = join(getcwd(), "data.csv")
+	csv_path = join('..' , "data.csv")
 	data = pd.read_csv(csv_path)
 	order_by_star = by_star(data, star=5)
 
