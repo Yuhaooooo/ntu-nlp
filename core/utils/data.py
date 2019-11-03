@@ -23,8 +23,6 @@ def build_field():
 
 def save_text_fields(field, output_dir: str):
     save_name = osp.join(output_dir, 'fields.pkl')
-    if os.path.isfile(save_name):
-        return
     with open(save_name, 'wb') as f:
         pickle.dump(field, f)
 
@@ -39,7 +37,7 @@ def get_iterator(datafields, data_dir, bs):
     _, label_field = datafields[0]
     _, text_field = datafields[1]
 
-    text_field.build_vocab(trn, vectors="glove.6B.300d")
+    text_field.build_vocab(trn, vectors="glove.6B.100d")
     label_field.build_vocab(trn)
 
     train_iterator, valid_iterator = BucketIterator.splits(

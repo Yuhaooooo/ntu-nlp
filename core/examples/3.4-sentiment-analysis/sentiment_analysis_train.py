@@ -5,13 +5,13 @@ from configs import DATA_DIR, OUTPUT_DIR
 from models.sentiment import RNN
 from utils.data import get_iterator, build_field, save_text_fields,  text_field_preprocessing
 import torch.optim as optim
-
+from torch.nn.utils import clip_grad_norm_
 import os.path as osp
 
 import spacy
 
 from tqdm import trange
-
+max_grad_norm=2
 BATCH_SIZE = 128
 LR = 1e-4
 N_EPOCHS = 200
@@ -42,6 +42,7 @@ def train(model, iterator, optimizer, criterion):
         loss = criterion(predictions, batch.stars)
         acc = binary_accuracy(predictions, batch.stars)
         loss.backward()
+        norm = clip_grad_norm_(model.parameters(), max_grad_norm)
         optimizer.step()
 
         epoch_loss += loss.item()
@@ -88,7 +89,7 @@ if __name__ == '__main__':
 
         if valid_loss < best_valid_loss:
             best_valid_loss = valid_loss
-            torch.save(model.state_dict(), osp.join(OUTPUT_DIR, 'sentiment-model.pt'))
+            torch.save(model.state_dict(), osp.join(OUTPUT_DIR, 'sentiment-model-200.pt'))
 
         t.set_description('Train Loss: {:.3f} | Train Acc: {:.2f}% | Val. Loss: {:.3f} |  Val. Acc: {:.2f}%'
                           .format(train_loss, train_acc * 100, valid_loss, valid_acc * 100))

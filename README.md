@@ -26,5 +26,13 @@ sh scripts/download-data.sh
 ```
 
 #### Option 2. Step-by-step download
-1. Download [preprocessed data](https://drive.google.com/open?id=1ay53rIluB334-RUqn28GR-QI6HxutJ6H) and move it into `core/data`.
-2. Data for training the sentiment analysis model [preprocessed data](https://drive.google.com/drive/folders/1GJd8tYRcxwuRj7mvZCX1zjjr63MF-zW1?usp=sharing)
+1. Download [preprocessed data](https://drive.google.com/open?id=1pkvBtO7B8suZx-tYttlUNcCoP4WPsWLr), move it into `core/data`
+and unzip:
+```shell script
+tar xvzf data.tar.gz
+```
+
+## Demo
+#### Run Web Application
+You have to run three microservices in `serving`, `server`, and `web-app`. See 
+[Model server instruction](serving/README.md), [API server instruction](server/README.md) and [frontend instruction](web-app/README.md).

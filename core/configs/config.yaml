@@ -1,5 +1,5 @@
 model:
-  embedding: 300
-  hidden: 512
+  embedding: 100
+  hidden: 192
   output: 1
   dropout: 0.2

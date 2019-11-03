@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from typing import List
 
-from serving.app.engine import SentimentService
+from engine import SentimentService
 
 app = FastAPI(title="Review Classification", openapi_url="/openapi.json")
 
