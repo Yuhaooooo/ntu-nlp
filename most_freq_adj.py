@@ -30,7 +30,7 @@ class AdjExtractor:
         r4_writer = csv.writer(open(self.r4_review_path, 'w'), delimiter=',')
         r5_writer = csv.writer(open(self.r5_review_path, 'w'), delimiter=',')
 
-        mapping = [
+        writer_list = [
             r1_writer,
             r2_writer,
             r3_writer,
@@ -38,14 +38,14 @@ class AdjExtractor:
             r5_writer
         ]
 
-        for writer in mapping:
+        for writer in writer_list:
             writer.writerow(["rating", "review"])
 
         print("----- Starting separting reviews by rating star, output directory: {}".format(self.output_path))
         for i in tqdm(range(self.size)):
             star = int(self.data['stars'][i])
             review = self.data['text'][i]
-            mapping[star-1].writerow([star, review])
+            writer_list[star-1].writerow([star, review])
 
     def extract_top_ten_most_freq_adj(self):
 
@@ -124,14 +124,12 @@ class AdjExtractor:
 
             for word in fd_by_rating[i]:
                 p_w_given_r = fd_by_rating[i][word] / num_tokens_by_rating[i]
-
                 total_occurance_of_word = 0
 
                 for fd in fd_by_rating:
                     total_occurance_of_word += fd[word]
 
                 p_w = total_occurance_of_word / total_num_tokens
-
                 prob[word] = p_w_given_r * log(p_w_given_r / p_w)
 
             sorted_prob = sorted(prob.items(), key=lambda kv : kv[1])

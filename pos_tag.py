@@ -30,7 +30,7 @@ class POSTagger:
 
     def _init_default_tagger(self):
         # get the most frequent tag in brown corpus
-        brown_tagged_words = brown.tagged_words()
+        brown_tagged_words = brown.tagged_words(tagset='universal')
 
         tags = [tag for (word, tag) in brown_tagged_words]
         most_freq_tag = nltk.FreqDist(tags).max()
@@ -52,7 +52,7 @@ class POSTagger:
         self.regex_tagger = nltk.RegexpTagger(patterns)
 
     def _init_baseline_tagger(self):
-        brown_tagged_words = brown.tagged_words()
+        brown_tagged_words = brown.tagged_words(tagset='universal')
         brown_words = brown.words()
 
         fd = nltk.FreqDist(brown_words)
@@ -62,16 +62,16 @@ class POSTagger:
         self.baseline_tagger = nltk.UnigramTagger(model=likely_tags)
 
     def _init_unigram_tagger(self):
-        self.unigram_tagger = nltk.UnigramTagger(brown.tagged_sents())
-        self.unigram_tagger_with_backoff = nltk.UnigramTagger(brown.tagged_sents(), backoff=self.default_tagger)
+        self.unigram_tagger = nltk.UnigramTagger(brown.tagged_sents(tagset='universal'))
+        self.unigram_tagger_with_backoff = nltk.UnigramTagger(brown.tagged_sents(tagset='universal'), backoff=self.default_tagger)
 
     def _init_bigram_tagger(self):
-        self.bigram_tagger = nltk.BigramTagger(brown.tagged_sents())
-        self.bigram_tagger_with_backoff = nltk.BigramTagger(brown.tagged_sents(), backoff=self.unigram_tagger_with_backoff)
+        self.bigram_tagger = nltk.BigramTagger(brown.tagged_sents(tagset='universal'))
+        self.bigram_tagger_with_backoff = nltk.BigramTagger(brown.tagged_sents(tagset='universal'), backoff=self.unigram_tagger_with_backoff)
 
     def _init_trigram_tagger(self):
-        self.trigram_tagger = nltk.TrigramTagger(brown.tagged_sents())
-        self.trigram_tagger_with_backoff = nltk.TrigramTagger(brown.tagged_sents(), backoff=self.bigram_tagger_with_backoff)
+        self.trigram_tagger = nltk.TrigramTagger(brown.tagged_sents(tagset='universal'))
+        self.trigram_tagger_with_backoff = nltk.TrigramTagger(brown.tagged_sents(tagset='universal'), backoff=self.bigram_tagger_with_backoff)
 
     def tag_with_default_tagger(self, tokens):
         # use default tagger which sets all tags to NN
@@ -110,7 +110,7 @@ class POSTagger:
     def tag_with_perceptron_tagger(self, tokens):
         # using the pre-trained PerceptronTagger model
         # trained on Sections 00-18 of the Wall Street Journal sections of OntoNotes 5
-        return nltk.pos_tag(tokens) #, tagset='universal')
+        return nltk.pos_tag(tokens, tagset='universal') #, tagset='universal')
 
     def test(self):
         sentence = self.data['text'][0]

@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b421c8ef-e5f7-4df3-8fc1-d63124862e21" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/CZ4045_Natural_Language_Processing.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/most_freq_adj.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pos_tag.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/most_freq_adj.py" beforeDir="false" afterPath="$PROJECT_DIR$/most_freq_adj.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pos_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/pos_tag.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tagger_result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/tagger_result.csv" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,34 +19,58 @@
           <entry key="project.closed" value="3" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="5" />
+          <entry key="py" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="5" />
+          <entry key="Python" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="7894" />
+          <entry key="py" value="7905" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="7894" />
+          <entry key="Python" value="7905" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pos_tag.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="434">
+              <caret line="161" column="54" lean-forward="true" selection-start-line="161" selection-start-column="54" selection-end-line="161" selection-end-column="54" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/most_freq_adj.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="695">
+              <caret line="138" column="17" lean-forward="true" selection-start-line="79" selection-start-column="4" selection-end-line="138" selection-end-column="17" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+                <marker date="1572772483327" expanded="true" signature="191:192" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -64,6 +86,8 @@
       <find>unigram_tagger_with_backoff</find>
       <find>_init</find>
       <find>self.r1_review_path = join(self.output_path, 'r1_reviews.csv')</find>
+      <find>brown</find>
+      <find>words</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -80,14 +104,13 @@
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="960" />
-    <option name="height" value="1057" />
+    <option name="height" value="1027" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -99,6 +122,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -116,7 +140,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.most_freq_adj">
+  <component name="RunManager" selected="Python.pos_tag">
     <configuration name="most_freq_adj" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="CZ4045_Natural_Language_Processing" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -165,8 +189,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.most_freq_adj" />
         <item itemvalue="Python.pos_tag" />
+        <item itemvalue="Python.most_freq_adj" />
       </list>
     </recent_temporary>
   </component>
@@ -184,14 +208,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="960" height="1057" extended-state="0" />
+    <frame x="0" y="23" width="960" height="1027" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.24920128" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.14104882" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2580311" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.0064171124" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -218,16 +243,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pos_tag.py">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="161" column="54" lean-forward="true" selection-start-line="161" selection-start-column="54" selection-end-line="161" selection-end-column="54" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/most_freq_adj.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="128" lean-forward="true" selection-start-line="128" selection-end-line="128" />
+        <state relative-caret-position="695">
+          <caret line="138" column="17" lean-forward="true" selection-start-line="79" selection-start-column="4" selection-end-line="138" selection-end-column="17" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <marker date="1571754839757" expanded="true" signature="191:192" ph="..." />
-            <marker date="1571754839757" expanded="true" signature="1779:4686" ph="..." />
+            <marker date="1572772483327" expanded="true" signature="191:192" ph="..." />
           </folding>
         </state>
       </provider>
