@@ -38,23 +38,23 @@ You have to run three microservices in `serving`, `server`, and `web-app`. See
 [Model server instruction](serving/README.md), [API server instruction](server/README.md) and [frontend instruction](web-app/README.md).
 
 ## 3.2 Data Analysis
-#### Writing Style
+### Writing Style
 ```shell script
 python3
 ```
-#### Sentence Segmentation
+### Sentence Segmentation
 ```shell script
 python3
 ```
-#### Tokenization and Stemming
+### Tokenization and Stemming
 ```shell script
 python3 
 ```
-#### POS Tagging
+### POS Tagging
 ```shell script
 python3 core/examples/3.2-Dataset-analysis/pos_tag.py 
 ```
-###### Note:
+##### Note:
 1. You need to edit the pos_tag.py file so that the csv_file_path in the main() is correctly pointing to the data.csv you downloaded.  <br/>
 ```python
 def main():  
@@ -67,12 +67,15 @@ def main():
 3. The output is stored in ./core/examples/3.2-Dataset-analysis/results/pos_tagging/tagger_result.csv. The CSV file contains five sections: each section includes the tagging results produced by a different tagger for the same sentence. The order of taggers which generate the results are: default tagger, regex-based tagger, baseline tagger, unigram tagger, unigram tagger with backoff, bigram tagger, bigram tagger with backoff, trigram tagger, trigram tagger with backoff and perceptron tagger.  <br/>
 
 
-#### Most Frequent Adjectives for each Rating
+### Most Frequent Adjectives for each Rating
+
 ```shell script
 python3 core/examples/3.2-Dataset-analysis/most_freq_adj.py
 ```
-###### Note:
+
+##### Note:
 1. You need to edit the pos_tag.py file so that the csv_file_path in the main() is correctly pointing to the data.csv you downloaded.  <br/>
+
 ```python
 if __name__ == "__main__":  
     reviews_separated = False  
@@ -83,22 +86,27 @@ if __name__ == "__main__":
     output_path = join(getcwd(), "results", "most_freq_adj")  
   
     adjExtractor = AdjExtractor(csv_file_path, output_path)
-'''
+```
+
 2. The output is saved in ./core/examples/3.2-Dataset-analysis/results/most_freq_adj/.   <br/>
 3. The script will first group the reviews based on the rating star and generate a csv for each rating star (e.g. r1_review.csv). Afterwards, the most frequent words are counted and the results are stored in most_freq_adj.csv. Lastly, the most indicative words are calculated and the results are stored in most_indicative_adj.csv.  <br/>
 
 ## 3.3 Noun Adjective Pair Summarizer
-#### Rule based method: POS Tagging + FSA
+### Rule based method: POS Tagging + FSA
+
 ```shell script
 python3 core/examples/3.3 Adj-Noun Pairs/Adj_Noun_Pairs.py 
 ``` 
-###### Note:
+
+##### Note:
 1. You can change these variables: <br/>
     numberOfBusinessId=5 [line 11, int, the number of different business id] <br/>
     numberOfPairs=5 [line 12, int, the number of noun-adj pairs for each business id] <br/>
     withExtra=False [line 13, boolean, if the extra wolds included, eg. good / very good] <br/>
 2. The generated dataframe will be stored in core/examples/3.3 Adj-Noun Pairs/Adj_Noun_Pairs.csv <br/>
-#### Bert-based method: 
+
+
+### Bert-based method: 
 ```shell script
 python 
 ```
