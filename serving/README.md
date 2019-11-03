@@ -11,6 +11,11 @@ cp -r ../core third
 mkdir -p app/weight
 ```
 ## Download Weights
+Download [weights](https://drive.google.com/open?id=1QHTaTORNstkfrCJDRvQ3g0iz52wgEjk_), move and unzip it under `app`
+using:
+```shell script
+tar xvzf weights.tar.gz
+```
 
 ## Deployment
 ```shell script
