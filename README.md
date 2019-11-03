@@ -63,12 +63,12 @@ python
 #### Rule based method: POS Tagging + FSA
 ```shell script
 python core/examples/3.3 Adj-Noun Pairs/Adj_Noun_Pairs.py 
-```
-You can change these variables:
-numberOfBusinessId=5 [line 11, int, the number of different business id]
-numberOfPairs=5 [line 12, int, the number of noun-adj pairs for each business id]
-withExtra=False [line 13, boolean, if the extra wolds included, eg. good / very good]
-The generated dataframe will be stored in core/examples/3.3 Adj-Noun Pairs/Adj_Noun_Pairs.csv
+``` 
+You can change these variables: <br/>
+numberOfBusinessId=5 [line 11, int, the number of different business id] <br/>
+numberOfPairs=5 [line 12, int, the number of noun-adj pairs for each business id] <br/>
+withExtra=False [line 13, boolean, if the extra wolds included, eg. good / very good] <br/>
+The generated dataframe will be stored in core/examples/3.3 Adj-Noun Pairs/Adj_Noun_Pairs.csv <br/>
 #### Bert-based method: 
 ```shell script
 python 
