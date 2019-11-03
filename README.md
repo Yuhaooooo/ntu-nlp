@@ -36,3 +36,45 @@ tar xvzf data.tar.gz
 #### Run Web Application
 You have to run three microservices in `serving`, `server`, and `web-app`. See 
 [Model server instruction](serving/README.md), [API server instruction](server/README.md) and [frontend instruction](web-app/README.md).
+
+## 3.2 Data Analysis
+#### Writing Style
+```shell script
+python 
+```
+#### Sentence Segmentation
+```shell script
+python 
+```
+#### Tokenization and Stemming
+```shell script
+python 
+```
+#### POS Tagging
+```shell script
+python 
+```
+#### Most Frequent Adjectives for each Rating
+```shell script
+python 
+```
+
+## 3.3 Noun Adjective Pair Summarizer
+#### Rule based method: POS Tagging + FSA
+```shell script
+python core/examples/3.3 Adj-Noun Pairs/Adj_Noun_Pairs.py 
+```
+You can change these variables:
+numberOfBusinessId=5 [line 11, int, the number of different business id]
+numberOfPairs=5 [line 12, int, the number of noun-adj pairs for each business id]
+withExtra=False [line 13, boolean, if the extra wolds included, eg. good / very good]
+The generated dataframe will be stored in core/examples/3.3 Adj-Noun Pairs/Adj_Noun_Pairs.csv
+#### Bert-based method: 
+```shell script
+python 
+```
+
+## 3.4 Application
+
+
+
