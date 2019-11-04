@@ -2,7 +2,7 @@ import nltk
 from nltk.corpus import brown
 import random
 import pandas as pd
-from os.path import join
+from os.path import join, dirname, realpath
 from os import getcwd
 import csv
 
@@ -11,8 +11,10 @@ class POSTagger:
     def __init__(self, csv_path):
         self.data = pd.read_csv(csv_path)
         self.size = len(self.data)
+        self.init_nltk()
         self._init_all_tagger()
         random.seed(22)
+        
 
     def init_nltk(self):
         nltk.download('punkt')
@@ -150,9 +152,9 @@ class POSTagger:
         print("----- All taggers pass the test\n")
 
 
-    def tag_random_sentences(self, n):
+    def tag_random_sentences(self, n, output_path):
         index_list = random.sample(range(0, self.size), n)
-        with open('results/pos_tagging/tagger_result.csv', mode='w') as f:
+        with open(join(output_path, 'tagger_result.csv'), mode='w') as f:
             result_writer = csv.writer(f, delimiter=',')
 
             print("----- Starting POS tagging\n")
@@ -175,10 +177,13 @@ class POSTagger:
 
 
 def main():
-    csv_file_path = join(getcwd(), 'core', 'data', 'data.csv')
+    current_path = dirname(realpath(__file__))
+
+    csv_file_path = join(current_path, '..', '..', 'data', 'data.csv')
+    output_path = join(current_path, "results", "pos_tagging")
 
     pos_tagger = POSTagger(csv_file_path)
-    pos_tagger.tag_random_sentences(5)
+    pos_tagger.tag_random_sentences(5, output_path)
 
 if __name__ == "__main__":
     main()

@@ -1,7 +1,7 @@
 import nltk
 from nltk import word_tokenize, pos_tag
 import pandas as pd
-from os.path import join, exists
+from os.path import join, exists, realpath, dirname
 from os import getcwd, makedirs
 import csv
 from tqdm import tqdm
@@ -147,8 +147,9 @@ if __name__ == "__main__":
     most_freq_adj = False
     most_indicative_adj = False
 
-    csv_file_path = join(getcwd(), 'core', 'data', 'data.csv')
-    output_path = join(getcwd(), 'core', 'examples', '3.2-Dataset-analysis', 'results', 'most_freq_adj')
+    current_path = dirname(realpath(__file__))
+    csv_file_path = join(current_path, '..', '..', 'data', 'data.csv')
+    output_path = join(current_path, 'results', 'most_freq_adj')
 
     adjExtractor = AdjExtractor(csv_file_path, output_path)
 
