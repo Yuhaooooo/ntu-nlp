@@ -135,3 +135,4 @@ max-classifer
 core/data/
 core/output/
 *.tar.gz
+*.json

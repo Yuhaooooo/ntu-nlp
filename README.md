@@ -15,22 +15,21 @@ conda env create -f environment.yml
 conda activate ntu-nlp
 
 # create data folders
-mkdir -p core/{output}
+mkdir -p core/{data,output}
 
 # Download packages
 python -m spacy download en
-python -c "import nltk; nltk.download('punkt'); nltk.download('vader_lexicon'); nltk.download('stopwords'); nltk.download('averaged_perceptron_tagger')"
-
+python -c "import nltk; nltk.download('punkt'); nltk.download('vader_lexicon')"
 ```
 
 ## Prepare Data
-#### Three csv files are needed for this project and get the data through option1 or option2: 
+#### Three csv files are needed for this project and get the data through option 1 or option 2: 
 * data.csv (task 3.2, 3.3 and 3.4)
 * train.csv (task 3.3 Bert-model and 3.4)
 * val.csv (task 3.3 Bert-model and 3.4) 
 
 	
-### Option1: Download Data
+### Option : Download Data
 In this way, all three csv files will be downloaded and stored in  `core/data/`
 
 #### Option 1.1 Auto-script
@@ -38,30 +37,24 @@ In this way, all three csv files will be downloaded and stored in  `core/data/`
 sh scripts/download-data.sh
 ```
 
-#### Option 1.2 Step-by-step download
-1. Download [preprocessed data](https://drive.google.com/open?id=1pkvBtO7B8suZx-tYttlUNcCoP4WPsWLr), move it into `core/data/`
+
+#### Option 1.2. Step-by-step download
+1. Download [data](https://drive.google.com/open?id=1Xu-BAztca_HduVoU2h-LcQpfI1gcau0Q), move it into `core/data/`
 and unzip:
 ```shell script
-tar xvzf data.tar.gz
+cd core/data
+unzip data.zip
 ```
 
-### Option2: Data Process
+### Option 2: Data Process
 ```shell script
-python core/examples/data_preprocess.py $pathOfDataInJson
+python core/examples/data_preprocess.py core/data/reviewSelected100.json
 ```
 **Note**:  
-1. You need to give the correct absolute path of the Json data file. <br/>
-
-    Example: `python3 core/examples/data_preprocess.py /Users/Foo/Documents/reviewSelected100.json`
-
+1. You need to give the correct absolute path of the Json data file. 
 2. Input: data file in Json.
-3. Output: `data.csv` stored in `core/data/data.csv`, which serves tasks after
-```shell script
-python core/utils/split_train.py
-```
-Split the data.csv into train.csv and val.csv, and both are stored in `core/data/`
+3. Output: `core/data/{data, train, val}.csv`, which serves tasks after
 
-## Excution
 
 ### 3.2 Data Analysis
 
@@ -70,9 +63,9 @@ Split the data.csv into train.csv and val.csv, and both are stored in `core/data
 python core/examples/3.2-Dataset-analysis/sentence_segmentation.py
 ```
 **Note**:  
-1. Input: `core/data/data.csv` <br/>
-2. Output: `core/examples/3.2-Dataset-analysis/results/sentence_segmentation_by_star/` <br/>
-3. Once sentence segmentation for a rating star is completed, the corresponding plot of review counts VS sentence counts will be displayed. For now, plots are displayed one by one. To view the plot for the next rating star, close the current plot. To save the image, click the "save" icon at the bottom of the plot display. <br/>
+1. Input: `core/data/data.csv`  
+2. Output: `core/examples/3.2-Dataset-analysis/results/sentence_segmentation_by_star/`  
+3. Once sentence segmentation for a rating star is completed, the corresponding plot of review counts VS sentence counts will be displayed. For now, plots are displayed one by one. To view the plot for the next rating star, close the current plot. To save the image, click the "save" icon at the bottom of the plot display.
 
 
 #### Tokenization and Stemming
@@ -130,8 +123,31 @@ python core/examples/3.3-Adj-Noun-Pairs/adj_noun_extractor2.py
 2. Output: the noun-adj pairs extracted printed out in the order of the business ids. <br/>
 
 ### 3.4 Application
+#### Sentiment analysis
 ```shell script
-python3 core/examples/3.4-sentiment-analysis/sentiment_analysis.py
+python core/examples/3.4-sentiment-analysis/sentiment_analysis.py
+```
+#### RNN model
+Train:  
+```shell script
+export PYTHONPATH="${PWD}/core"
+python core/examples/3.4-sentiment-analysis/sentiment_analysis_train.py
+unset PYTHONPATH
+```
+Predict:  
+Change inputs here:
+```
+...
+    input_list=[[
+        "Appreciate the call ahead seating! Always a joy to go in n sit down with in 15 mins MAX! Thanks for awesome food and service!"
+    ], ["delicious, grubby, chinese food in generous portions and always great service. their szchewaun chicken is THE BOMB. so spicy it makes me sweat."]],
+...
+```
+And run:
+```shell script
+export PYTHONPATH="${PWD}/core"
+python core/examples/3.4-sentiment-analysis/sentiment_analysis_predict.py
+unset PYTHONPATH
 ```
 **Note**:
 1. Input: a text string <br/>

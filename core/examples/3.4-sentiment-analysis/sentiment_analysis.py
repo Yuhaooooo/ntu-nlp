@@ -1,19 +1,36 @@
-import pandas as pd
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
-import nltk
-nltk.download('vader_lexicon')
 import pandas as pd
+from pathlib import Path
+from tqdm import tqdm
+
 
 # import a LEXICON
 def get_sentiment(text):
     sid = SentimentIntensityAnalyzer()
+    return sid.polarity_scores(text)
 
-    sid = SentimentIntensityAnalyzer()
 
-    sentiment_score = sid.polarity_scores(text)
+CORE_DIR = Path(__file__).absolute().parent / '../../'
+df = pd.read_csv(CORE_DIR / 'data/data.csv')
 
-    return sentiment_score
+right = 0
+total = len(df)
+scores = []
+for index, row in tqdm(df.iterrows()):
+    sentiment_score = get_sentiment(row["text"])
+    scores.append(str(sentiment_score))
+    if sentiment_score['compound'] > 0.05:
+        if row['stars'] > 2.0:
+            right += 1
+    elif sentiment_score['compound'] > -0.05:
+        if row['stars'] == 2.0:
+            right += 1
+    elif sentiment_score['compound'] < -0.05:
+        if row['stars'] < 2.0:
+            right += 1
 
-text = input("Enter a string : ") 
+print('Accuracy {}'.format(right / total))
 
-print(get_sentiment(text))
+with open(CORE_DIR / 'output/result.txt', 'w') as f:
+    f.writelines(scores)
+print('Finish prediction, result is saved in core/output/result.txt')
