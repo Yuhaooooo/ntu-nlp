@@ -1,7 +1,10 @@
 import pandas as pd
 import json
 import sys
+import os
 from os.path import join
+
+
 
 
 def main():
@@ -21,7 +24,12 @@ def main():
 
 	print('saved to data.csv ...')
 
-	df.to_csv(join('..', 'data', 'data.csv'))
+	save_path = join(os.getcwd(), 'core', 'data')
+
+	if not os.path.exists(save_path):
+		os.makedirs(save_path)
+
+	df.to_csv(join(save_path, 'data.csv'))
 
 if __name__ == '__main__':
 	main()
