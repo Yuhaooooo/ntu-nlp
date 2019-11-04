@@ -64,5 +64,6 @@ dependencies:
     - pandas==0.24.2
     - spacy==2.1.4
     - nltk==3.2.4
+    - sklearn==0.21.3
 prefix: /home/lym/anaconda3/envs/ntu-nlp
 

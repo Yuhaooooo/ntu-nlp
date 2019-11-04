@@ -1,3 +1,4 @@
+
 # CZ4045_Natural_Language_Processing
 
 ## Install
@@ -19,33 +20,43 @@ python -c "import nltk; nltk.download('punkt'); nltk.download('vader_lexicon'); 
 
 ```
 
-## Download Data
+## Prepare Data
+#### Three csv files are needed for this project: 
+* data.csv (task 3.2, 3.3 and 3.4)
+* train.csv (task 3.3 Bert-model and 3.4)
+* val.csv (task 3.3 Bert-model and 3.4) <br/>
+They can be accessed through the following ways:
+	
+### Option1: Download Data
+In this way, all three csv files will be downloaded and stored in  `core/data/`
 
-#### Option 1. Auto-script
+#### Option 1.1 Auto-script
 ```shell script
 sh scripts/download-data.sh
 ```
 
-#### Option 2. Step-by-step download
+#### Option 1.2 Step-by-step download
 1. Download [preprocessed data](https://drive.google.com/open?id=1pkvBtO7B8suZx-tYttlUNcCoP4WPsWLr), move it into `core/data/`
 and unzip:
 ```shell script
 tar xvzf data.tar.gz
 ```
 
-## Example
-### 0.0 Data Process
-#### Please run the data_preprocess.py before runnin any of the tasks below
+### Option2: Data Process
 ```shell script
 python core/examples/data_preprocess.py $pathOfDataInJson
 ```
 **Note**:  
-1. You need to give the correct absolute path of the Json data file. 
+1. You need to give the correct absolute path of the Json data file. <br/>
 
     Example: `python3 core/examples/data_preprocess.py /Users/Foo/Documents/reviewSelected100.json`
 
 2. Input: data file in Json.
 3. Output: `data.csv` stored in `core/data/data.csv`, which serves tasks after
+```shell script
+python core/utils/split_train.py
+```
+Split the data.csv into train.csv and val.csv, and both are stored in `core/data/`
 
 ### 3.2 Data Analysis
 
