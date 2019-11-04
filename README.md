@@ -111,8 +111,31 @@ python core/examples/3.3-Adj-Noun-Pairs/adj_noun_extractor2.py
 2. Output: the noun-adj pairs extracted printed out in the order of the business ids. <br/>
 
 ### 3.4 Application
+#### Sentiment analysis
 ```shell script
 python core/examples/3.4-sentiment-analysis/sentiment_analysis.py
+```
+#### RNN model
+Train:  
+```shell script
+export PYTHONPATH="${PWD}/core"
+python core/examples/3.4-sentiment-analysis/sentiment_analysis_train.py
+unset PYTHONPATH
+```
+Predict:  
+Change inputs here:
+```
+...
+    input_list=[[
+        "Appreciate the call ahead seating! Always a joy to go in n sit down with in 15 mins MAX! Thanks for awesome food and service!"
+    ], ["delicious, grubby, chinese food in generous portions and always great service. their szchewaun chicken is THE BOMB. so spicy it makes me sweat."]],
+...
+```
+And run:
+```shell script
+export PYTHONPATH="${PWD}/core"
+python core/examples/3.4-sentiment-analysis/sentiment_analysis_predict.py
+unset PYTHONPATH
 ```
 **Note**:
 1. Input: a text string <br/>
