@@ -91,7 +91,7 @@ def plot(data, index, label):
 ## main program for Q3.2 Task 3 Part 1
 
 def run():
-	csv_path = join('..', "data.csv")
+	csv_path = join('..', '..', 'data', "data.csv")
 	data = pd.read_csv(csv_path)
 
 	all_tokens =all_tokenized(data, stemming=False, merge_all=False)
@@ -124,7 +124,7 @@ def print_top_results(freq_dict, num):
 
 def get_most_freq(num=20):
 	
-	csv_path = join('..', "data.csv")
+	csv_path = join('..', '..', 'data', "data.csv")
 	data = pd.read_csv(csv_path)
 
 	all_tokens =all_tokenized(data, stemming=False, merge_all=True, filter=True)

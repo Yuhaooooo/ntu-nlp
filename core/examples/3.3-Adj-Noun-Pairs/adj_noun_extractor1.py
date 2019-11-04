@@ -193,7 +193,7 @@ def getPairs(bs_text_map, numberOfPairs=5, withExtra=False, returnInDf=True):
 
 if __name__ == "__main__":
 
-    df = pd.read_csv(join('..', 'data.csv'))
+    df = pd.read_csv(join('..', '..', 'data', 'data.csv'))
 
     businessPairs = getPairs(selectNBusinessId(df, numberOfBusinessId = numberOfBusinessId), numberOfPairs = numberOfPairs, withExtra = withExtra)
     
