@@ -2,7 +2,7 @@
 
 filenames=(data.tar.gz)
 fileids=(1pkvBtO7B8suZx-tYttlUNcCoP4WPsWLr)
-unzip_paths=(core/data)
+unzip_paths=(core/example)
 
 for i in $(seq 0 0);
 do
