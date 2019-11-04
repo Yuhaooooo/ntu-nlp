@@ -1,5 +1,8 @@
 
+
 # CZ4045_Natural_Language_Processing
+
+** Please run all the commands in the directory `ntu-nlp/` **
 
 ## Install
 
@@ -21,11 +24,11 @@ python -c "import nltk; nltk.download('punkt'); nltk.download('vader_lexicon'); 
 ```
 
 ## Prepare Data
-#### Three csv files are needed for this project: 
+#### Three csv files are needed for this project and get the data through option1 or option2: 
 * data.csv (task 3.2, 3.3 and 3.4)
 * train.csv (task 3.3 Bert-model and 3.4)
-* val.csv (task 3.3 Bert-model and 3.4) <br/>
-They can be accessed through the following ways:
+* val.csv (task 3.3 Bert-model and 3.4) 
+
 	
 ### Option1: Download Data
 In this way, all three csv files will be downloaded and stored in  `core/data/`
@@ -57,6 +60,8 @@ python core/examples/data_preprocess.py $pathOfDataInJson
 python core/utils/split_train.py
 ```
 Split the data.csv into train.csv and val.csv, and both are stored in `core/data/`
+
+## Excution
 
 ### 3.2 Data Analysis
 
