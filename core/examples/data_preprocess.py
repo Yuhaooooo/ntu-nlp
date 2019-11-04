@@ -17,7 +17,7 @@ def main():
     with open(json_file, 'rb') as f:
         data = f.read()
 
-    data = data.decode('utf-8').encode().decode()
+    data = data.decode('latin-1').encode().decode()
 
     columns = list(json.loads(data.split('\n')[0]).keys())
     rows = [list(json.loads(r).values()) for r in data.split('\n')[:-1]]

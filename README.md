@@ -26,17 +26,18 @@ sh scripts/download-data.sh
 ```
 
 #### Option 2. Step-by-step download
-1. Download [preprocessed data](https://drive.google.com/open?id=1pkvBtO7B8suZx-tYttlUNcCoP4WPsWLr), move it into `core/data/`
+1. Download [data](https://drive.google.com/open?id=1Xu-BAztca_HduVoU2h-LcQpfI1gcau0Q), move it into `core/data/`
 and unzip:
 ```shell script
-tar xvzf data.tar.gz
+cd core/data
+unzip data.zip
 ```
 
 ## Example
 ### 0.0 Data Process
 #### Please run the data_preprocess.py before runnin any of the tasks below
 ```shell script
-python core/examples/data_preprocess.py <path of data.json>
+python core/examples/data_preprocess.py core/data/reviewSelected100.json
 ```
 **Note**:  
 1. You need to give the correct absolute path of the Json data file. 
