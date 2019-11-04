@@ -17,7 +17,7 @@ def main():
     with open(json_file, 'rb') as f:
         data = f.read()
 
-    data = data.decode('latin-1').encode().decode()
+    data = data.decode('utf-8').encode().decode()
 
     columns = list(json.loads(data.split('\n')[0]).keys())
     rows = [list(json.loads(r).values()) for r in data.split('\n')[:-1]]
@@ -30,8 +30,8 @@ def main():
     df = df.drop(["review_id", "user_id", "business_id", "useful", "funny", "cool", "date"], axis=1)
 
     train, test = train_test_split(df, test_size=0.2)
-    train.to_csv(CORE_DIR / 'data/train.csv')
-    test.to_csv(CORE_DIR / 'data/val.csv')
+    train.to_csv(CORE_DIR / 'data/train.csv', index=False)
+    test.to_csv(CORE_DIR / 'data/val.csv', index=False)
     print('saved to train.csv, val.csv')
 
 
