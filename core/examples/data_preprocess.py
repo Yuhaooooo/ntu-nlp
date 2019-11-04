@@ -1,6 +1,12 @@
 import pandas as pd
 import json
 import sys
+from pathlib import Path
+
+from sklearn.model_selection import train_test_split
+
+CORE_DIR = Path(__file__).absolute().parent / '../'
+DATA_CSV = CORE_DIR / 'data/data.csv'
 
 
 def main():
@@ -19,7 +25,14 @@ def main():
 
     print('saved to data.csv ...')
 
-    df.to_csv('data.csv')
+    df.to_csv(DATA_CSV)
+
+    df = df.drop(["review_id", "user_id", "business_id", "useful", "funny", "cool", "date"], axis=1)
+
+    train, test = train_test_split(df, test_size=0.2)
+    train.to_csv(CORE_DIR / 'data/train.csv')
+    test.to_csv(CORE_DIR / 'data/val.csv')
+    print('saved to train.csv, val.csv')
 
 
 if __name__ == '__main__':

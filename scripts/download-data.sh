@@ -2,7 +2,7 @@
 
 filenames=(data.tar.gz)
 fileids=(1pkvBtO7B8suZx-tYttlUNcCoP4WPsWLr)
-unzip_paths=(core/example)
+unzip_paths=(core/)
 
 for i in $(seq 0 0);
 do
@@ -16,5 +16,6 @@ do
   rm cookie
   tar xvzf "${filenames[i]}"
   # Go back
+  rm "${filenames[i]}"
   cd - || return 1
 done

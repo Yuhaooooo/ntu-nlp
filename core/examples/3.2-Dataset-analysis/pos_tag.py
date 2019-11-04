@@ -175,7 +175,7 @@ class POSTagger:
 
 
 def main():
-    csv_file_path = join('..', "data.csv")
+    csv_file_path = join(getcwd(), 'core', 'data', 'data.csv')
 
     pos_tagger = POSTagger(csv_file_path)
     pos_tagger.tag_random_sentences(5)
