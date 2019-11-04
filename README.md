@@ -53,7 +53,7 @@ python core/examples/data_preprocess.py core/data/reviewSelected100.json
 2. Input: data file in Json.
 3. Output: `core/data/{data, train, val}.csv`, which serves tasks after
 
-
+## Execution
 ### 3.2 Data Analysis
 
 #### Sentence Segmentation
