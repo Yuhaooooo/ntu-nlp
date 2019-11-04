@@ -48,17 +48,14 @@ python3 core/examples/data_preprocess.py $pathOfDataInJson
 2. The processed csv file will be stored in core/examples/data.csv and served for tasks after
 
 ## 3.2 Data Analysis
-### Writing Style
-```shell script
-python3
-```
+
 ### Sentence Segmentation
 ```shell script
-python3
+python3 core/examples/3.2-Dataset-analysis/sentence_segmentation.py
 ```
 ### Tokenization and Stemming
 ```shell script
-python3 
+python3 core/examples/3.2-Dataset-analysis/tokenization_stemming.py
 ```
 ### POS Tagging
 ```shell script
