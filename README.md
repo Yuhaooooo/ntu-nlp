@@ -16,7 +16,6 @@ mkdir -p core/{output}
 # Download packages
 python -m spacy download en
 python -c "import nltk; nltk.download('punkt'); nltk.download('vader_lexicon')"
-
 ```
 
 ## Download Data
@@ -115,7 +114,7 @@ python core/examples/3.3-Adj-Noun-Pairs/adj_noun_extractor2.py
 
 ### 3.4 Application
 ```shell script
-python3 core/examples/3.4-sentiment-analysis/sentiment_analysis.py
+python core/examples/3.4-sentiment-analysis/sentiment_analysis.py
 ```
 **Note**:
 1. Input: a text string <br/>
