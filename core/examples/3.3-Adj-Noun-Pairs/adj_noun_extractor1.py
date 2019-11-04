@@ -185,7 +185,7 @@ def getPairs(bs_text_map, numberOfPairs=5, withExtra=False, returnInDf=True):
     if returnInDf:
         df = pd.DataFrame(columns=['BusinessId', 'AdjNounPair'])
         df.BusinessId, df.AdjNounPair = list(bs_pair_map.keys()), list(bs_pair_map.values())
-        df.to_csv('Adj_Noun_Pairs.csv')
+        df.to_csv('adj_noun_pairs1.csv')
         return df
 
     return bs_pair_map

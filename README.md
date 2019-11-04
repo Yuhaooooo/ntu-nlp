@@ -37,6 +37,16 @@ tar xvzf data.tar.gz
 You have to run three microservices in `serving`, `server`, and `web-app`. See 
 [Model server instruction](serving/README.md), [API server instruction](server/README.md) and [frontend instruction](web-app/README.md).
 
+## 0.0 Data Process
+#### Please run the data_preprocess.py before runnin any of the tasks below
+```shell script
+python3 core/examples/data_preprocess.py $pathOfDataInJson
+```
+##### Note: 
+1. You need to give the correct absolute path of the Json data file.
+    Example: python3 core/examples/data_preprocess.py /Users/Foo/Documents/reviewSelected100.json
+2. The processed csv file will be stored in core/examples/data.csv and served for tasks after
+
 ## 3.2 Data Analysis
 ### Writing Style
 ```shell script
@@ -95,7 +105,7 @@ if __name__ == "__main__":
 ### Rule based method: POS Tagging + FSA
 
 ```shell script
-python3 core/examples/3.3 Adj-Noun Pairs/Adj_Noun_Pairs.py 
+python3 core/examples/3.3-Adj-Noun-Pairs/adj_noun_extractor1.py  
 ``` 
 
 ##### Note:
@@ -103,15 +113,16 @@ python3 core/examples/3.3 Adj-Noun Pairs/Adj_Noun_Pairs.py
     numberOfBusinessId=5 [line 11, int, the number of different business id] <br/>
     numberOfPairs=5 [line 12, int, the number of noun-adj pairs for each business id] <br/>
     withExtra=False [line 13, boolean, if the extra wolds included, eg. good / very good] <br/>
-2. The generated dataframe will be stored in core/examples/3.3 Adj-Noun Pairs/Adj_Noun_Pairs.csv <br/>
+2. The generated dataframe will be stored in core/examples/3.3-Adj-Noun-Pairs/adj_noun_pairs1.csv <br/>
 
 
 ### Bert-based method: 
 ```shell script
-python 
+python3 core/examples/3.3-Adj-Noun-Pairs/adj_noun_extractor2.py 
 ```
 
 ## 3.4 Application
-
-
+```shell script
+python3 core/examples/3.4-sentiment-analysis/sentiment_analysis.py
+```
 
