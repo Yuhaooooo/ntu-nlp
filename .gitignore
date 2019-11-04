@@ -136,3 +136,4 @@ core/data/
 core/output/
 *.tar.gz
 *.json
+core/examples/.DS_Store
