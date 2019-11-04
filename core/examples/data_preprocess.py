@@ -1,6 +1,7 @@
 import pandas as pd
 import json
 import sys
+from os.path import join
 
 
 def main():
@@ -20,7 +21,7 @@ def main():
 
 	print('saved to data.csv ...')
 
-	df.to_csv('data.csv')
+	df.to_csv(join('..', 'data', 'data.csv'))
 
 if __name__ == '__main__':
 	main()

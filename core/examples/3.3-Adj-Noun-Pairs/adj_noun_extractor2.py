@@ -11,6 +11,8 @@ from bert_score import score
 import torch
 from string import punctuation
 import pickle
+from os.path import join
+from os import getcwd
 
 nlp = spacy.load("en_core_web_sm")
 
@@ -71,7 +73,7 @@ def read_all_businesses(business_id_list):
     adj_lists = {}
     noun_lists = {}
 
-    df = pd.read_csv("data.csv")
+    df = pd.read_csv(df = pd.read_csv(join(getcwd(), 'core', 'data', 'data.csv')))
     df = df.to_dict(orient='records')
 
     print(len(df))

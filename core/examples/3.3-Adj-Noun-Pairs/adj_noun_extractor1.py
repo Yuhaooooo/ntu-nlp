@@ -2,6 +2,7 @@ import pandas as pd
 import re
 import spacy
 import random
+from os import getcwd
 from os.path import join
 from nltk.tokenize import sent_tokenize
 from collections import Counter
@@ -185,7 +186,7 @@ def getPairs(bs_text_map, numberOfPairs=5, withExtra=False, returnInDf=True):
     if returnInDf:
         df = pd.DataFrame(columns=['BusinessId', 'AdjNounPair'])
         df.BusinessId, df.AdjNounPair = list(bs_pair_map.keys()), list(bs_pair_map.values())
-        df.to_csv('adj_noun_pairs1.csv')
+        df.to_csv(join(getcwd(), 'core', 'examples', '3.3-Adj-Noun-Pairs', 'adj_noun_pairs1.csv'))
         return df
 
     return bs_pair_map
@@ -193,7 +194,9 @@ def getPairs(bs_text_map, numberOfPairs=5, withExtra=False, returnInDf=True):
 
 if __name__ == "__main__":
 
-    df = pd.read_csv(join('..', '..', 'data', 'data.csv'))
+    # df = pd.read_csv('/Users/heyuhao/Documents/GitHub/school_project/CZ4045_Natural_Language_Processing/core/data/data.csv')
+
+    df = pd.read_csv(join(getcwd(), 'core', 'data', 'data.csv'))
 
     businessPairs = getPairs(selectNBusinessId(df, numberOfBusinessId = numberOfBusinessId), numberOfPairs = numberOfPairs, withExtra = withExtra)
     

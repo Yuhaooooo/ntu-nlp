@@ -15,7 +15,7 @@ mkdir -p core/{output}
 
 # Download packages
 python -m spacy download en
-python -c "import nltk; nltk.download('punkt'); nltk.download('vader_lexicon')"
+python -c "import nltk; nltk.download('punkt'); nltk.download('vader_lexicon'); nltk.download('stopwords'); nltk.download('averaged_perceptron_tagger')"
 
 ```
 
@@ -27,7 +27,7 @@ sh scripts/download-data.sh
 ```
 
 #### Option 2. Step-by-step download
-1. Download [preprocessed data](https://drive.google.com/open?id=1pkvBtO7B8suZx-tYttlUNcCoP4WPsWLr), move it into `core/example`
+1. Download [preprocessed data](https://drive.google.com/open?id=1pkvBtO7B8suZx-tYttlUNcCoP4WPsWLr), move it into `core/data/`
 and unzip:
 ```shell script
 tar xvzf data.tar.gz
@@ -55,7 +55,7 @@ python core/examples/3.2-Dataset-analysis/sentence_segmentation.py
 ```
 **Note**:  
 1. Input: `core/data/data.csv` <br/>
-2. Output: `core/examples/3.2-Dataset-analysis/results/sentence_segmentation_by_star` <br/>
+2. Output: `core/examples/3.2-Dataset-analysis/results/sentence_segmentation_by_star/` <br/>
 3. Once sentence segmentation for a rating star is completed, the corresponding plot of review counts VS sentence counts will be displayed. For now, plots are displayed one by one. To view the plot for the next rating star, close the current plot. To save the image, click the "save" icon at the bottom of the plot display. <br/>
 
 
@@ -89,7 +89,7 @@ python core/examples/3.2-Dataset-analysis/most_freq_adj.py
 
 **Note**:
 1. Input: `core/data/data.csv`  <br/>
-2. Output: `core/examples/3.2-Dataset-analysis/results/most_freq_adj` <br/>
+2. Output: `core/examples/3.2-Dataset-analysis/results/most_freq_adj/` <br/>
 3. The script will first group the reviews based on the rating star and generate a csv for each rating star (e.g. r1_review.csv). Afterwards, the most frequent words are counted and the results are stored in most_freq_adj.csv. Lastly, the most indicative words are calculated and the results are stored in most_indicative_adj.csv.   <br/>
 
 ### 3.3 Noun Adjective Pair Summarizer
