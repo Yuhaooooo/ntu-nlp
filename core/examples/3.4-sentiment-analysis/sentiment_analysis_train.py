@@ -3,11 +3,13 @@ import torch.nn as nn
 
 from configs import DATA_DIR, OUTPUT_DIR
 from models.sentiment import RNN
+# noinspection PyUnresolvedReferences
 from utils.data import get_iterator, build_field, save_text_fields,  text_field_preprocessing
 import torch.optim as optim
 from torch.nn.utils import clip_grad_norm_
 import os.path as osp
 
+# noinspection PyUnresolvedReferences
 import spacy
 
 from tqdm import trange
@@ -89,7 +91,7 @@ if __name__ == '__main__':
 
         if valid_loss < best_valid_loss:
             best_valid_loss = valid_loss
-            torch.save(model.state_dict(), osp.join(OUTPUT_DIR, 'sentiment-model-200.pt'))
+            torch.save(model.state_dict(), osp.join(OUTPUT_DIR, 'sentiment-model.pt'))
 
         t.set_description('Train Loss: {:.3f} | Train Acc: {:.2f}% | Val. Loss: {:.3f} |  Val. Acc: {:.2f}%'
                           .format(train_loss, train_acc * 100, valid_loss, valid_acc * 100))

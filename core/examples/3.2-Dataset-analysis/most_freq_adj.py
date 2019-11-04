@@ -45,13 +45,14 @@ class AdjExtractor:
         for i in tqdm(range(self.size)):
             star = int(self.data['stars'][i])
             review = self.data['text'][i]
-            mapping[star-1].writerow([star, review])
+            writer_list[star-1].writerow([star, review])
 
     def extract_top_ten_most_freq_adj(self):
 
         f = open(join(self.output_path, "most_freq_adj.csv"), 'w')
         f_writer = csv.writer(f)
         f_writer.writerow(["star", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+        adj_tags = ["JJ", "JJS", "JJR"]
         reviews_list = [
             self.r1_review_path,
             self.r2_review_path,
@@ -70,7 +71,7 @@ class AdjExtractor:
 
             for j in tqdm(range(size)):
                 for (word, tag) in pos_tag(word_tokenize(reviews[j])):
-                    if tag == "JJ":
+                    if tag in adj_tags:
                         fd[word.lower()] += 1
 
             f_writer.writerow([i+1] + fd.most_common(10))
@@ -90,7 +91,7 @@ class AdjExtractor:
         f = open(join(self.output_path, "most_indicative_adj.csv"), 'w')
         f_writer = csv.writer(f)
         f_writer.writerow(["star", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
-
+        adj_tags = ["JJ", "JJS", "JJR"]
         total_fd = nltk.FreqDist()
         total_num_tokens = 0
 
@@ -110,7 +111,7 @@ class AdjExtractor:
                     if word.lower().isalpha():
                         count += 1
 
-                    if tag == "JJ":
+                    if tag in adj_tags:
                         current_fd[word.lower()] += 1
                         total_fd[word.lower()] += 1
 
@@ -146,8 +147,8 @@ if __name__ == "__main__":
     most_freq_adj = False
     most_indicative_adj = False
 
-    csv_file_path = join('..', "data.csv")
-    output_path = join(getcwd(), "results", "most_freq_adj")
+    csv_file_path = join(getcwd(), 'core', 'data', 'data.csv')
+    output_path = join(getcwd(), 'core', 'examples', '3.2-Dataset-analysis', 'results', 'most_freq_adj')
 
     adjExtractor = AdjExtractor(csv_file_path, output_path)
 

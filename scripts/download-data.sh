@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-filenames=(data.tar.gz)
-fileids=(1pkvBtO7B8suZx-tYttlUNcCoP4WPsWLr)
-unzip_paths=(core/example)
+filenames=(data.zip)
+fileids=(1Xu-BAztca_HduVoU2h-LcQpfI1gcau0Q)
+unzip_paths=(core/data)
 
 for i in $(seq 0 0);
 do
@@ -14,7 +14,8 @@ do
       "https://drive.google.com/uc?export=download&confirm=$(awk '/download/ {print $NF}' ./cookie)&id=${fileids[i]}" \
       -o "${filenames[i]}"
   rm cookie
-  tar xvzf "${filenames[i]}"
+  unzip "${filenames[i]}"
   # Go back
+  rm "${filenames[i]}"
   cd - || return 1
 done
