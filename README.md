@@ -2,11 +2,10 @@
 
 # CZ4045_Natural_Language_Processing
 
-** Please run all the commands in the directory `ntu-nlp/` **
+**Please run all the commands in the directory `ntu-nlp/`**
 
 ## Install
 
-#### Option 1. Step-by-step Installation
 Please make sure that you have installed Conda.
 ```shell script
 # install Conda env
@@ -23,22 +22,21 @@ python -c "import nltk; nltk.download('punkt'); nltk.download('vader_lexicon')"
 ```
 
 ## Prepare Data
-#### Three csv files are needed for this project and get the data through option 1 or option 2: 
+#### Three csv files are needed for this project: 
 * data.csv (task 3.2, 3.3 and 3.4)
 * train.csv (task 3.3 Bert-model and 3.4)
 * val.csv (task 3.3 Bert-model and 3.4) 
 
 	
-### Option : Download Data
-In this way, all three csv files will be downloaded and stored in  `core/data/`
+### Step 1: Download Data
 
-#### Option 1.1 Auto-script
+#### Option 1 Auto-script
 ```shell script
 sh scripts/download-data.sh
 ```
 
 
-#### Option 1.2. Step-by-step download
+#### Option 2. Step-by-step download
 1. Download [data](https://drive.google.com/open?id=1Xu-BAztca_HduVoU2h-LcQpfI1gcau0Q), move it into `core/data/`
 and unzip:
 ```shell script
@@ -46,7 +44,7 @@ cd core/data
 unzip data.zip
 ```
 
-### Option 2: Data Process
+### Step 2: Data Process
 ```shell script
 python core/examples/data_preprocess.py core/data/reviewSelected100.json
 ```
